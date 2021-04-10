@@ -29,16 +29,16 @@ int main(int argc, char const *argv[])
     switch (operacion+funcion)
     {
     case 3:
-        printf("Suma binaria\n");
+        printf("Suma Decimal\n");
         break;
     case 4:
-        printf("Resta binaria\n");
+        printf("Suma binaria\n");
         break;
     case 5:
-        printf("Suma decimal\n");
+        printf("Resta decimal\n");
         break;
     case 6:
-        printf("Resta decimal\n");
+        printf("Resta binaria\n");
         break;
 
     default:
@@ -98,11 +98,11 @@ int selOperation()
     {
         case 'b':
             printf("Eligio operacion Binaria\n");
-            return 3;
+            return 5;
             break;
         case 'd':
             printf("Eligio operacion decimal\n");
-            return 5;
+            return 3;
             break;
         default:
             printf("\n######-----Ingreso cualquier cosa-----######\n");
