@@ -24,7 +24,28 @@ int main(int argc, char const *argv[])
         operacion = selOperation();
     }
     printf("El valor de operacion es: %d\n", operacion);
+    
+
+    switch (operacion+funcion)
+    {
+    case 3:
+        printf("Suma binaria\n");
+        break;
+    case 4:
+        printf("Resta binaria\n");
+        break;
+    case 5:
+        printf("Suma decimal\n");
+        break;
+    case 6:
+        printf("Resta decimal\n");
+        break;
+
+    default:
+        break;
+    }
     return 0;
+
 }
 
 void printLine(){
@@ -39,7 +60,7 @@ void printLine(){
 
 int getOperation()
 {
-    char funcionElegida[1];
+    char funcionElegida[2];
     printf("Elija la operación: \n");
     printf("(+) Suma  \n");
     printf("(-) Resta \n");
@@ -68,7 +89,7 @@ int getOperation()
 
 int selOperation()
 {
-    char operationElegida[1];
+    char operationElegida[2];
     printf("Elija la operación: \n");
     printf("(b) Binario \n");
     printf("(d) Decimal \n");
