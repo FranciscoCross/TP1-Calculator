@@ -3,37 +3,60 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-void printLine();
+#include "cdecl.h"
+
+//Funciones en C
+void imprimirLinea();
 int getOperation();
-int selOperation();
+int getNumberSystem();
+
+//Funciones en ASM
+extern int suma(int n1, int n2); //__attribute__((cdecl));
+extern int resta(int n1, int n2); //__attribute__((cdecl));
 
 int main(int argc, char const *argv[])
 {
-    int funcion = 100;
     int operacion = 100;
-    printLine();
+    int systemaNumeracion = 100;
+    imprimirLinea();
     printf("Bienvenido a su calculadora MULTI modulo\n");
-    printLine();
-    while(funcion == 100)
+    imprimirLinea();
+    while(operacion == 100)
     {
-        funcion = getOperation();
+        operacion = getOperation();
     }
-    printf("El valor de funcion es: %d\n", funcion);
+    //printf("El valor de operacion es: %d\n", operacion);
     
-    while(operacion== 100)
+    while(systemaNumeracion== 100)
     {
-        operacion = selOperation();
+        systemaNumeracion = getNumberSystem();
     }
-    printf("El valor de operacion es: %d\n", operacion);
-    
+    //printf("El valor de systemaNumeracion es: %d\n", systemaNumeracion);
 
-    switch (operacion+funcion)
+    char input1[2], input2[2];
+    int num1, num2, res;
+
+    switch (systemaNumeracion+operacion)
     {
     case 3:
         printf("Suma Decimal\n");
+        printf("Ingrese el primer numero: \n");
+        fflush(stdin);
+        scanf("%d", &num1);
+        printf("Ingrese el segundo numero: \n");
+        fflush(stdin);
+        scanf("%d", &num2);
+        res = suma(num1, num2);
         break;
     case 4:
-        printf("Suma binaria\n");
+        printf("Resta Decimal\n");
+        printf("Ingrese el primer numero: \n");
+        fflush(stdin);
+        scanf("%d", &num1);
+        printf("Ingrese el segundo numero: \n");
+        fflush(stdin);
+        scanf("%d", &num2);
+        res = resta(num1, num2);
         break;
     case 5:
         printf("Resta decimal\n");
@@ -45,11 +68,12 @@ int main(int argc, char const *argv[])
     default:
         break;
     }
+    printf("El resutaldo es: %d\n", res);
     return 0;
 
 }
 
-void printLine(){
+void imprimirLinea(){
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     int i = 0;
@@ -61,13 +85,13 @@ void printLine(){
 
 int getOperation()
 {
-    char funcionElegida[2];
+    char operacionElegida[2];
     printf("Elija la operación: \n");
     printf("(+) Suma  \n");
     printf("(-) Resta \n");
     printf("(e) Salir \n");
-    scanf("%s",funcionElegida);
-    switch (funcionElegida[0])
+    scanf("%s",operacionElegida);
+    switch (operacionElegida[0])
     {
         case '+':
             printf("SOY UN +\n");
@@ -88,7 +112,7 @@ int getOperation()
     } 
 }
 
-int selOperation()
+int getNumberSystem()
 {
     char operationElegida[2];
     printf("Elija la operación: \n");
@@ -98,11 +122,11 @@ int selOperation()
     switch (operationElegida[0])
     {
         case 'b':
-            printf("Eligio operacion Binaria\n");
+            printf("Eligio systemaNumeracion Binaria\n");
             return 5;
             break;
         case 'd':
-            printf("Eligio operacion decimal\n");
+            printf("Eligio systemaNumeracion decimal\n");
             return 3;
             break;
         default:
