@@ -2,6 +2,7 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio_ext.h>
 
 #include "cdecl.h"
 
@@ -9,6 +10,8 @@
 void imprimirLinea();
 int getOperation();
 int getNumberSystem();
+int scanBin();
+long decimalToBinary(int decimalnum);
 
 //Funciones en ASM
 extern int suma(int n1, int n2); //__attribute__((cdecl));
@@ -33,7 +36,7 @@ int main(int argc, char const *argv[])
     }
     //printf("El valor de systemaNumeracion es: %d\n", systemaNumeracion);
 
-    char input1[2], input2[2];
+    char input1[2], input2[2], bin1[1], bin2[1];
     int num1, num2, res;
 
     switch (systemaNumeracion+operacion)
@@ -59,16 +62,31 @@ int main(int argc, char const *argv[])
         res = resta(num1, num2);
         break;
     case 5:
-        printf("Resta decimal\n");
+        printf("Suma Binaria\n");
+        printf("Ingrese el primer numero: ");
+        __fpurge(stdin);
+        num1 = scanBin();
+        printf("Ingrese el segundo numero: ");
+        __fpurge(stdin);
+        num2 = scanBin();
+        res = suma(num1, num2);
         break;
     case 6:
-        printf("Resta binaria\n");
+        printf("Resta Binaria\n");
+        printf("Ingrese el primer numero: ");
+        __fpurge(stdin);
+        num1 = scanBin();
+        printf("Ingrese el segundo numero: ");
+        __fpurge(stdin);
+        num2 = scanBin();
+        res = resta(num1, num2);
         break;
 
     default:
         break;
     }
-    printf("El resutaldo es: %d\n", res);
+    printf("\nEl resutaldo es: %d\n", res);
+    printf("El resutaldo en BIN es:%ld\n",decimalToBinary(res));
     return 0;
 
 }
@@ -134,4 +152,35 @@ int getNumberSystem()
             return 100;
             break;
     } 
+}
+
+int scanBin()
+{
+    char bin; int dec = 0;
+    while (bin != '\n') 
+    { 
+        
+        bin=fgetc(stdin);
+        if (bin == '1') dec = dec * 2 + 1; 
+        else if (bin == '0') dec *= 2; 
+         
+        
+    } 
+    printf("El valor pasado a dec es: %d\n", dec);
+    return dec;
+}
+
+long decimalToBinary(int decimalnum)
+{
+    long binarynum = 0;
+    int rem, temp = 1;
+
+    while (decimalnum!=0)
+    {
+        rem = decimalnum%2;
+        decimalnum = decimalnum / 2;
+        binarynum = binarynum + rem*temp;
+        temp = temp * 10;
+    }
+    return binarynum;
 }
