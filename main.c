@@ -13,6 +13,7 @@ int main(int argc, char const *argv[])
     int operacion = 100;
     printLine();
     printf("Bienvenido a su calculadora MULTI modulo\n");
+    printLine();
     while(funcion == 100)
     {
         funcion = getOperation();
