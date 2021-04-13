@@ -31,3 +31,6 @@ assert_equals "$response" 0
 
 response=$(./main b  12 - 11)
 assert_equals "$response" ERROR
+
+response=$(./main b  a - 11)
+assert_equals "$response" ERROR

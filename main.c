@@ -18,6 +18,8 @@ int checkOperation(const char *opSymbol);
 int binToDec(const char *num);
 void printBinResult(int dec);
 
+int comprobarNumero(const char *num);
+
 //Funciones en ASM
 extern int suma(int n1, int n2);  //__attribute__((cdecl));
 extern int resta(int n1, int n2); //__attribute__((cdecl));
@@ -30,8 +32,8 @@ extern int resta(int n1, int n2); //__attribute__((cdecl));
 int main(int argc, char const *argv[])
 {
     if(argc < 5){
-        perror("Too few argumetns\n");
-        exit(EXIT_FAILURE);
+        printf("ERROR\n");
+        exit(0);
     }
 
     int numSystem;
@@ -43,22 +45,24 @@ int main(int argc, char const *argv[])
 
     numSystem = checkNumberSystem(argv[1]);
     if(numSystem < 0){
-        perror("Error");
-        exit(EXIT_FAILURE);
+        printf("ERROR\n");
+        exit(0);
     }
 
     operation = checkOperation(argv[3]);
     if(operation < 0){
-        perror("Error");
-        exit(EXIT_FAILURE);
+        printf("ERROR\n");
+        exit(0);
     }
 
     //printf("Sistema de numeración: %d\n", numSystem);
     //printf("Operacion: %d\n", operation);
 
+   
+
     if(numSystem){
-        num1 = atoi(argv[2]);
-        num2 = atoi(argv[4]);
+        num1 = comprobarNumero(argv[2]);
+        num2 = comprobarNumero(argv[4]);
     }
     else{
         num1 = binToDec(argv[2]);
@@ -144,7 +148,7 @@ int binToDec(const char *num){
             result = result;
         }
         else{
-            printf("ERROR");
+            printf("ERROR\n");
             exit(0);
         }
     }
@@ -176,4 +180,18 @@ void printBinResult(int dec){
     else{
         printf("%ld\n", binNum);
     }
+}
+
+int comprobarNumero(const char *num){
+    int lenght = strlen(num);
+    for(int i = lenght - 1; i >= 0; i--){
+        if(num[i] >= '0' && num[i] <= '9'){
+            continue;
+        }
+        else{
+            printf("ERROR\n");
+            exit(0);
+        }
+    }
+    return atoi(num);
 }
