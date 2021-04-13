@@ -39,17 +39,17 @@ int main(int argc, char const *argv[])
     int num1 = 0, num2 = 0;
     int result = 0;
 
-    printHeader();
+    //printHeader();
 
     numSystem = checkNumberSystem(argv[1]);
     if(numSystem < 0){
-        perror("ERROR: Wrong numeration system\n");
+        perror("Error");
         exit(EXIT_FAILURE);
     }
 
     operation = checkOperation(argv[3]);
     if(operation < 0){
-        perror("ERORR: Wrong operation\n");
+        perror("Error");
         exit(EXIT_FAILURE);
     }
 
@@ -73,10 +73,10 @@ int main(int argc, char const *argv[])
     }
 
     if(numSystem){
-        printf("Resultado de %s %s %s = %d\n", argv[2], argv[3], argv[4], result);
+        printf("%d\n", result);
     }
     else{
-        printf("Resultado de %s %s %s = ", argv[2], argv[3], argv[4]);
+        //printf("Resultado de %s %s %s = ", argv[2], argv[3], argv[4]);
         printBinResult(result);
     }
     
@@ -144,8 +144,8 @@ int binToDec(const char *num){
             result = result;
         }
         else{
-            perror("ERROR: Wrong binary format\n");
-            exit(EXIT_FAILURE);
+            printf("ERROR");
+            exit(0);
         }
     }
 
@@ -171,9 +171,9 @@ void printBinResult(int dec){
     }
 
     if(negate){
-        printf("-%ldb = (%d)d\n", binNum, dec);    
+        printf("-%ld\n",binNum);    
     }
     else{
-        printf("%ldb = (%d)d\n", binNum, dec);
+        printf("%ld\n", binNum);
     }
 }
