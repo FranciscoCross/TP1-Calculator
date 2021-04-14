@@ -18,7 +18,7 @@ operations:
 	$(AS) $(ASFLAGS) -d ELF_TYPE operations.asm -o operations.o
 
 main: main.c operations
-	$(CC) $(CFLAGS) main.c operations.o -o main
+	$(CC) $(CFLAGS) main.c operations.o -lm -o main
 
 
 clean :
